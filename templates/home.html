@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Home</a> |
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">Log Out</a> |
+            <a href="{% url 'password_change' %}">Change Password</a>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a> |
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+</header>
+<hr>
+
+<p>Welcome to the page, {% if user.is_authenticated %}{{user.username|title}}{% else %}User{% endif %}!</p>
+
+{% endblock body %}
