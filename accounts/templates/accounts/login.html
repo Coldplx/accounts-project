@@ -1,35 +1,39 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
+{% endblock stylesheet %}
 
 {% block body %}
-
     <div class="container">
-
         <h1 class="text-center my-4">
-            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}">
+                <button type="button" class="btn btn-success">
+                    <i class="bi bi-house-fill"></i> HomePage
+                </button>            
+            </a>
         </h1>
-
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-8">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Log In</h3>
-
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            {% include 'accounts/form.html' %}
+                            <button type="submit" class="btn btn-primary btn-block mt-4 form-control">Log in</button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                    You don't have an account yet? <a href="{% url 'signup' %}">Join now</a>
+                    </div>
+                </div>
+                <small class="text-center py-2">
+                    <p class="text-muted py-2">Forgot your password? <a href="{% url 'password_reset' %}">Reset password</a></p>
+                </small>
+            </div>
         </div>
-
-
     </div>
-
-    {% comment %} <h2>Log In</h1>
-    <form action="" method="post" novalidate>
-        {% csrf_token %}
-        {% include 'accounts/form.html' %}
-        <button type="submit" class="btn btn-success">Login</button>
-    </form>
-    <p>Forgot your passwod? <a href="{% url 'password_reset' %}">Resset password.</a></p>
-    <p>Don't you have an account yet? <a href="{% url 'signup' %}">Join now.</a></p>
-
- {% endcomment %}
-
-
 {% endblock body %}
